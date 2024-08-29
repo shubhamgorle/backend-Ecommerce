@@ -8,13 +8,13 @@ const errorMiddleWare = require("./middleware/error.js")
 const cors = require("cors")
 const corsConfig = {
     origin: "*",
-    Credential : true,
-    methods : ["GET", "POST", "PUT", "DELETE", "PATCH"]
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"]
 }
 dotenv.config({path:"backend/config/config.env"});
 
 // middlewares
-app.options("", cors(corsConfig))
+// app.options("", cors(corsConfig))
 app.use(cors(corsConfig))
 app.use(express.json());
 app.use(cookieparser())

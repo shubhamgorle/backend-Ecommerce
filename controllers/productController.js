@@ -52,8 +52,9 @@ exports.getAllProducts = catchAsyncError(async (req, res, next) => {
     // let filterdProductCount = products.length;
     // apiFeatures.pagination(resultPerPage);
     // products = await apiFeatures.query;
-
+console.time("start")
     const products = await Product.find()
+    console.timeEnd("start")
     res.status(200).json({
         success: true,
         products,

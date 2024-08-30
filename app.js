@@ -5,18 +5,22 @@ const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload")
 const dotenv = require("dotenv");
 const errorMiddleWare = require("./middleware/error.js")
-// const cors = require("cors")
-// const corsConfig = {
-//     origin: "*",
-//     credentials: true,
-//     allowedHeaders: ['Content-Type', 'Authorization'],
-//     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"]
-// }
+const cors = require("cors")
+const corsConfig = {
+    origin: "*",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"]
+}
 dotenv.config({path:"backend/config/config.env"});
 
 // middlewares
-// app.options("*", cors(corsConfig))
-// app.use(cors(corsConfig))
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*'); // Allow all origins
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+  });
+app.use(cors(corsConfig))
+app.options("*", cors(corsConfig))
 app.use(express.json());
 app.use(cookieparser())
 app.use(bodyParser.urlencoded({extended:true}));
